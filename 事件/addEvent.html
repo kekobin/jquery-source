@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Add Event</title>
+	<script type="text/javascript" src="addEvent.js"></script>
+</head>
+<body>
+	<button id="add">add</button>
+	<script type="text/javascript">
+		var $el = document.getElementById("add")
+		addEvent($el, 'click', function(e) {
+			console.log(e)
+			// alert('1')
+		})
+	</script>
+</body>
+</html>

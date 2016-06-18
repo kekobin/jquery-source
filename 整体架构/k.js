@@ -16,8 +16,22 @@
 		}
 	};
 
-	K.prototype.init.prototype = K.prototype;//要点2-用K原型对象覆盖了init构造器的原型对象(这样返回的int
+	K.prototype.init.prototype = K.fn = K.prototype;//要点2-用K原型对象覆盖了init构造器的原型对象(这样返回的int
 	//实例也能访问所有K的原型方法)
+
+	K.fn['click'] = function(fn) {
+		this.trigger('click', fn);
+	};
+
+	K.fn['trigger'] = function(name, fn) {
+		if(document.addEventListener) {
+			document.addEventListener(name, fn, false);
+		} else if(document.attachEvent) {
+			document.attachEvent(name, fn);
+		} else {
+			
+		}
+	}
 
 	global.K = K;
 })(window, undefined);

@@ -18,3 +18,17 @@
 	为DOM中的很多元素绑定相同事件；
 	为DOM中尚不存在的元素绑定事件；
 **/
+
+//1.click事件
+// jQuery.each( ("blur focus focusin focusout load resize scroll unload 
+// click dblclick " +
+//     "mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
+//     "change select submit keydown keypress keyup error contextmenu").split(" "), function( i, name ) {
+
+//     // Handle event binding
+//     jQuery.fn[ name ] = function( data, fn ) {
+//         return arguments.length > 0 ?
+//             this.on( name, null, data, fn ) :
+//             this.trigger( name );
+//     };
+// });
