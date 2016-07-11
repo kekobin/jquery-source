@@ -14,6 +14,43 @@
 				console.log(e)
 			})
 		});
+
+		var obj = {},
+			objToString = obj.toString,
+			arr = [],
+			arrSlice = arr.slice;
+
+		var Callbacks = function( options ) {
+			var list = [],
+				self = {
+					add: function() {
+						(function add(opts) {
+							arrSlice.call(opts).forEach(function(item) {
+								if( objToString.call(item) == "[object Function]" ) {
+									list.push(item);
+								} else if( objToString.call(item) == "[object Array]" && item.length > 0) {
+									add(item);
+								}
+							});
+						})(arguments);
+					},
+					length: function() {
+						return list.length;
+					},
+					fire: function() {
+						list.forEach(function(item) {
+							item.call(this);
+						});
+					}
+				};
+
+			return self;
+		};
+
+		var cb = Callbacks();
+		cb.add([function a1() {console.log('1111')}, function a2() {console.log('2222')}, function a3() {console.log('33333')}]);
+		cb.fire();
+		console.log(cb.length())
 	</script>
 </body>
 </html>

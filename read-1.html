@@ -3,13 +3,80 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- <script type="text/javascript" src="jquery-mine.js?t=2"></script> -->
+	<script type="text/javascript" src="jquery-2.0.3.js"></script>
 </head>
 <body>
+<div id="test" class="test">
+	<div class="child">child</div>
+	<ul>
+		<li class="list">111</li>
+		<li class="list">222</li>
+		<li class="list">333</li>
+	</ul>
+</div>
 <script type="text/javascript">
-	(function(window, undefined) {
-	//window变成了局部变量，查找速度快，便于压缩;传undefined防止在某些浏览器下它被修改
+	// (function(window, undefined) {
+	// //window变成了局部变量，查找速度快，便于压缩;传undefined防止在某些浏览器下它被修改
+
+	// })(window);
+
 	
-	})(window);
+	
+	// $(function() {
+	// 	var list = $('.list');
+	// 	console.log(list.get())
+	// })
+
+
+	// var topics = {};
+
+	// $.Topic = function(id) {
+	// 	var callbacks,
+	// 	    method,
+	// 	    topic = id && topics[id];
+
+	// 	if(!topic) {
+	// 		callback = $.Callbacks();
+
+	// 		topic = {
+	// 			subscribe: callback.add,
+	// 			publish: callback.fire,
+	// 			unsubscribe: callback.remove
+	// 		};
+
+	// 		if(id) {
+	// 			topics[id] = topic;
+	// 		}
+	// 	}
+
+	// 	return topic;
+	// };
+
+	// function fn1(value) {
+	// 	console.log('hello -- value')
+	// 	console.log(value)
+	// }
+
+	// $.Topic('testCallback').subscribe(fn1);
+	// $.Topic('testCallback').publish(fn1);
+
+	var observable = {
+		callbacks: [],
+		add: function(fn) {
+			this.callbacks.push(fn);
+		},
+		fire: function() {
+			this.callbacks.forEach(function(fn) {
+				fn();
+			});
+		}
+	};
+
+	observable.add(function() {console.log('add--1')});
+	observable.add(function() {console.log('add--2')});
+
+	observable.fire();
 </script>
 </body>
 </html>
