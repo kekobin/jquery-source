@@ -3,13 +3,73 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script src="jquery-2.0.3.js?t=1"></script>
 </head>
 <body>
+<div class="test" style="width:10px;">hello</div>
+<ul class="list">
+	<li>111</li>
+	<li>222</li>
+	<li>333</li>
+</ul>
 <script type="text/javascript">
 	(function(window, undefined) {
 	//window变成了局部变量，查找速度快，便于压缩;传undefined防止在某些浏览器下它被修改
 	
 	})(window);
+
+	// var elems = document.getElementsByClassName('.test');
+	// console.log($().pushStack(elems))
+
+	// var lists = $('.list>li');
+	// $.each(lists, function(i, item) {
+	// 	console.log('list is ....')
+	// 	console.log(item)
+	// 	console.log(i)
+	// });
+
+	var obj = {},
+		oToString = obj.toString,
+		class2Type = [];
+
+	var baseTypes = "Boolean String Number Function Object Array RegExp Error Date".split(" ");
+
+	baseTypes.forEach(function(name, i) {
+		class2Type[ "[object " + name + "]" ] = name.toLowerCase();
+	});
+
+	function type(obj) {
+		return obj == null ? String(null) : 
+			(typeof obj == 'object' || typeof obj == 'function' ? class2Type[ oToString.call(obj) ] || "object" : typeof obj);
+	}
+
+	var obj2 = {
+		show: function() {
+			console.log(this)
+		}
+	};
+
+	// $('.test').click( $.proxy(obj2.show, obj2) )
+	$('.test').click( $.proxy(obj2, 'show') )
+
+	$('.test').css("height", "10px");
+	$('.test').css("height");
+
+	function aa() {
+		console.log('aaa')
+	}
+	function bb() {
+		console.log('bbb')
+	}
+	function cc() {
+		console.log('ccc')
+	}
+
+	var cb = $.Callbacks('once');
+
+	cb.add(aa);
+	cb.fire();
+	
 </script>
 </body>
 </html>

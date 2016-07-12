@@ -221,7 +221,6 @@ jQuery.fn = jQuery.prototype = {
 	// Take an array of elements and push it onto the stack
 	// (returning the new matched element set)
 	pushStack: function( elems ) {
-
 		// Build a new jQuery matched element set
 		var ret = jQuery.merge( this.constructor(), elems );
 
@@ -378,7 +377,7 @@ jQuery.extend({
 			jQuery.readyWait++;
 		} else {
 			jQuery.ready( true );
-		}
+		}yty
 	},
 
 	// Handle when the DOM is ready
@@ -419,8 +418,8 @@ jQuery.extend({
 		return obj != null && obj === obj.window;
 	},
 
-	isNumeric: function( obj ) {
-		return !isNaN( parseFloat(obj) ) && isFinite( obj );
+	isNumeric: function( obj ) {//typeof NaN == 'number'
+		return !isNaN( parseFloat(obj) ) && isFinite( obj );//有限数字
 	},
 
 	type: function( obj ) {
@@ -432,7 +431,7 @@ jQuery.extend({
 			class2type[ core_toString.call(obj) ] || "object" :
 			typeof obj;
 	},
-
+	//是否为对象自变量{}或new Object()
 	isPlainObject: function( obj ) {
 		// Not plain objects:
 		// - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -447,6 +446,7 @@ jQuery.extend({
 		// the "constructor" property of certain host objects, ie. |window.location|
 		// https://bugzilla.mozilla.org/show_bug.cgi?id=814622
 		try {
+			//isPrototypeOf是直接挂载在object上面的，其它类型都没有这个方法
 			if ( obj.constructor &&
 					!core_hasOwn.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
 				return false;
@@ -488,11 +488,12 @@ jQuery.extend({
 		var parsed = rsingleTag.exec( data ),
 			scripts = !keepScripts && [];
 
-		// Single tag
+		// Single tag 是否是单标签
 		if ( parsed ) {
 			return [ context.createElement( parsed[1] ) ];
 		}
 
+		//多标签
 		parsed = jQuery.buildFragment( [ data ], context, scripts );
 
 		if ( scripts ) {
@@ -527,10 +528,10 @@ jQuery.extend({
 
 	noop: function() {},
 
-	// Evaluates a script in a global context
+	// Evaluates a script in a global context-将代码转成全局
 	globalEval: function( code ) {
 		var script,
-				indirect = eval;
+				indirect = eval;//这里eval是window的属性，而不是关键字
 
 		code = jQuery.trim( code );
 
@@ -538,7 +539,7 @@ jQuery.extend({
 			// If the code includes a valid, prologue position
 			// strict mode pragma, execute code by injecting a
 			// script tag into the document.
-			if ( code.indexOf("use strict") === 1 ) {
+			if ( code.indexOf("use strict") === 1 ) {//因为在严格模式下不支持eval
 				script = document.createElement("script");
 				script.text = code;
 				document.head.appendChild( script ).parentNode.removeChild( script );
@@ -550,7 +551,7 @@ jQuery.extend({
 		}
 	},
 
-	// Convert dashed to camelCase; used by the css and data modules
+	// Convert dashed(虚线) to camelCase; used by the css and data modules
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
@@ -655,7 +656,7 @@ jQuery.extend({
 
 		return first;
 	},
-
+	//过滤
 	grep: function( elems, callback, inv ) {
 		var retVal,
 			ret = [],
@@ -712,7 +713,7 @@ jQuery.extend({
 	guid: 1,
 
 	// Bind a function to a context, optionally partially applying any
-	// arguments.
+	// arguments.//将一个函数代理到某个上下文上去
 	proxy: function( fn, context ) {
 		var tmp, args, proxy;
 
@@ -742,6 +743,7 @@ jQuery.extend({
 
 	// Multifunctional method to get and set values of a collection
 	// The value/s can optionally be executed if it's a function
+	//chainable: true -> set ; false -> get
 	access: function( elems, fn, key, value, chainable, emptyGet, raw ) {
 		var i = 0,
 			length = elems.length,
@@ -862,7 +864,7 @@ function isArraylike( obj ) {
 
 	return type === "array" || type !== "function" &&
 		( length === 0 ||
-		typeof length === "number" && length > 0 && ( length - 1 ) in obj );
+		typeof length === "number" && length > 0 && ( length - 1 ) in obj );//for arguments
 }
 
 // All jQuery objects should point back to these
@@ -2945,6 +2947,7 @@ jQuery.Callbacks = function( options ) {
 								if ( !options.unique || !self.has( arg ) ) {
 									list.push( arg );
 								}
+							//cb.add([func1, func2, func3])
 							} else if ( arg && arg.length && type !== "string" ) {
 								// Inspect recursively
 								add( arg );
