@@ -52,12 +52,12 @@
 		// cb.fire();
 		// console.log(cb.length())
 
-		// //Deferred
-		// var dfd = $.Deferred();
+		//Deferred
+		var dfd = $.Deferred();
 
-		// setTimeout(function() {
-		// 	dfd.resolve();
-		// }, 2000);
+		// function testDfd() {
+		// 	return dfd.promise();
+		// }
 
 		// dfd.done(function() {
 		// 	console.log('sssssss')
@@ -65,16 +65,42 @@
 		// 	console.log('fffffff')
 		// })
 
-		var cb1 = $.Callbacks();
-		var cb2 = $.Callbacks();
-		var cb3 = $.Callbacks();
-		cb1.add(function() {console.log('111111111')})
-		cb2.add(function() {console.log('222222222')})
-		cb3.add(function() {console.log('333333333')})
+		// dfd.always(function() {
+		// 	console.log('always==')
+		// })
 
-		cb1.fire();
-		cb2.fire();
-		cb3.fire();
+		// var dfd2 = testDfd();
+
+		// dfd2.done(function() {
+		// 	console.log('dfd2===')
+		// });
+
+		setTimeout(function() {
+			dfd.notify();
+		}, 1000)
+		
+		dfd.then(function() {
+			console.log('successful===')
+		}, function() {
+			console.log('fail=====')
+		}, function() {
+			console.log('progress====')
+		})
+
+
+
+		// var cb1 = $.Callbacks();
+		// var cb2 = $.Callbacks();
+		// var cb3 = $.Callbacks();
+		// cb1.add(function() {console.log('111111111')})
+		// cb2.add(function() {console.log('222222222')})
+		// cb3.add(function() {console.log('333333333')})
+
+		// cb1.fire();
+		// cb2.fire();
+		// cb3.fire();
+
+
 	</script>
 </body>
 </html>
