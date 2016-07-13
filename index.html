@@ -9,11 +9,72 @@
 <body>
 	<div class="content">test</div>
 	<script type="text/javascript">
-		$(function() {
-			$('.content').click(function(e) {
-				console.log(e)
-			})
-		});
+		// $(function() {
+		// 	$('.content').click(function(e) {
+		// 		console.log(e)
+		// 	})
+		// });
+
+		// var obj = {},
+		// 	objToString = obj.toString,
+		// 	arr = [],
+		// 	arrSlice = arr.slice;
+
+		// var Callbacks = function( options ) {
+		// 	var list = [],
+		// 		self = {
+		// 			add: function() {
+		// 				(function add(opts) {
+		// 					arrSlice.call(opts).forEach(function(item) {
+		// 						if( objToString.call(item) == "[object Function]" ) {
+		// 							list.push(item);
+		// 						} else if( objToString.call(item) == "[object Array]" && item.length > 0) {
+		// 							add(item);
+		// 						}
+		// 					});
+		// 				})(arguments);
+		// 			},
+		// 			length: function() {
+		// 				return list.length;
+		// 			},
+		// 			fire: function() {
+		// 				list.forEach(function(item) {
+		// 					item.call(this);
+		// 				});
+		// 			}
+		// 		};
+
+		// 	return self;
+		// };
+
+		// var cb = Callbacks();
+		// cb.add([function a1() {console.log('1111')}, function a2() {console.log('2222')}, function a3() {console.log('33333')}]);
+		// cb.fire();
+		// console.log(cb.length())
+
+		// //Deferred
+		// var dfd = $.Deferred();
+
+		// setTimeout(function() {
+		// 	dfd.resolve();
+		// }, 2000);
+
+		// dfd.done(function() {
+		// 	console.log('sssssss')
+		// }).fail(function() {
+		// 	console.log('fffffff')
+		// })
+
+		var cb1 = $.Callbacks();
+		var cb2 = $.Callbacks();
+		var cb3 = $.Callbacks();
+		cb1.add(function() {console.log('111111111')})
+		cb2.add(function() {console.log('222222222')})
+		cb3.add(function() {console.log('333333333')})
+
+		cb1.fire();
+		cb2.fire();
+		cb3.fire();
 	</script>
 </body>
 </html>

@@ -6,17 +6,20 @@
 	<script src="jquery-2.0.3.js?t=1"></script>
 </head>
 <body>
-<div class="test" style="width:10px;">hello</div>
-<ul class="list">
-	<li>111</li>
-	<li>222</li>
-	<li>333</li>
-</ul>
+
+<div id="test" class="test">
+	<div class="child">child</div>
+	<ul>
+		<li class="list">111</li>
+		<li class="list">222</li>
+		<li class="list">333</li>
+	</ul>
+</div>
 <script type="text/javascript">
-	(function(window, undefined) {
-	//window变成了局部变量，查找速度快，便于压缩;传undefined防止在某些浏览器下它被修改
-	
-	})(window);
+	// (function(window, undefined) {
+	// //window变成了局部变量，查找速度快，便于压缩;传undefined防止在某些浏览器下它被修改
+
+	// })(window);
 
 	// var elems = document.getElementsByClassName('.test');
 	// console.log($().pushStack(elems))
@@ -70,6 +73,60 @@
 	cb.add(aa);
 	cb.fire();
 	
+	// $(function() {
+	// 	var list = $('.list');
+	// 	console.log(list.get())
+	// })
+
+
+	// var topics = {};
+
+	// $.Topic = function(id) {
+	// 	var callbacks,
+	// 	    method,
+	// 	    topic = id && topics[id];
+
+	// 	if(!topic) {
+	// 		callback = $.Callbacks();
+
+	// 		topic = {
+	// 			subscribe: callback.add,
+	// 			publish: callback.fire,
+	// 			unsubscribe: callback.remove
+	// 		};
+
+	// 		if(id) {
+	// 			topics[id] = topic;
+	// 		}
+	// 	}
+
+	// 	return topic;
+	// };
+
+	// function fn1(value) {
+	// 	console.log('hello -- value')
+	// 	console.log(value)
+	// }
+
+	// $.Topic('testCallback').subscribe(fn1);
+	// $.Topic('testCallback').publish(fn1);
+
+	var observable = {
+		callbacks: [],
+		add: function(fn) {
+			this.callbacks.push(fn);
+		},
+		fire: function() {
+			this.callbacks.forEach(function(fn) {
+				fn();
+			});
+		}
+	};
+
+	observable.add(function() {console.log('add--1')});
+	observable.add(function() {console.log('add--2')});
+
+	observable.fire();
 </script>
 </body>
 </html>
