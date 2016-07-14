@@ -75,17 +75,17 @@
 		// 	console.log('dfd2===')
 		// });
 
-		setTimeout(function() {
-			dfd.notify();
-		}, 1000)
+		// setTimeout(function() {
+		// 	dfd.notify();
+		// }, 1000)
 		
-		dfd.then(function() {
-			console.log('successful===')
-		}, function() {
-			console.log('fail=====')
-		}, function() {
-			console.log('progress====')
-		})
+		// dfd.then(function() {
+		// 	console.log('successful===')
+		// }, function() {
+		// 	console.log('fail=====')
+		// }, function() {
+		// 	console.log('progress====')
+		// })
 
 
 
@@ -100,7 +100,29 @@
 		// cb2.fire();
 		// cb3.fire();
 
+		// var when = $.when();
+		// when.done(function() {//这里memory的作用使得add完成后立马fire
+		// 	console.log("111")
+		// });
+		
+		function aaa() {
+			var dfd = $.Deferred();
 
+			dfd.resolve();
+
+			return dfd;
+		}
+		function bbb() {
+			var dfd = $.Deferred();
+
+			dfd.resolve();
+
+			return dfd;
+		}
+		var when = $.when(aaa(), bbb());
+		when.done(function() {
+			console.log("111")
+		});
 	</script>
 </body>
 </html>
