@@ -4,23 +4,72 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
-	<script src="util.js"></script>
+	<script src="util.js?t=1"></script>
 </head>
 <body>
 	<script>
-		var dfd = Util.Deferred();
+		// var dfd = Util.Deferred();
 
-		dfd.done(function(data) {
+		// dfd.done(function(data) {
+		// 	console.log(data)
+		// }).fail(function() {
+		// 	console.log('fail-')
+		// });
+
+		// dfd.always(function(data) {
+		// 	console.log(data);
+		// });
+		// dfd.then(function(data) {
+		// 	console.log(data)
+		// }, function(error) {
+		// 	console.log(error)
+		// }, function(progress) {
+		// 	console.log(progress)
+		// })
+
+		// setTimeout(function() {
+		// 	dfd.notify({hello : 'progress'});
+		// }, 1000)
+
+		// function testPromise() {
+		// 	var dfd = Util.Deferred();
+
+		// 	setTimeout(function() {
+		// 		dfd.resolve();
+		// 	}, 1000);
+
+		// 	return dfd.promise();//当在testPromise中需要等待执行结果，但是调用者改变不了其状态的时候，就应该返回promise
+		// }
+
+		// testPromise().done(function() {
+		// 	console.log('this is promise---')
+		// })
+
+		function test1() {
+			var q = Util.Deferred();
+
+			setTimeout(function() {
+				q.resolve('This is test1');
+			}, 2000);
+
+			return q;
+		}
+		// function test2() {
+		// 	var q = Util.Deferred();
+
+		// 	setTimeout(function() {
+		// 		q.resolve('This is test2');
+		// 	}, 2000);
+
+		// 	return q;
+		// }
+
+		// var when = Util.when(test1(), test2());
+		var when = Util.when(test1());
+
+		when.done(function(data) {
 			console.log(data)
-		}).fail(function() {
-			console.log('fail-')
-		});
-dfd.resolve({hello : 'hello1'});
-		setTimeout(function() {
-			dfd.resolve({hello : 'hello'});
-		}, 1000)
-
-		
+		})
 	</script>
 </body>
 </html>
