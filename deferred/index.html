@@ -15,9 +15,9 @@
 		}).fail(function() {
 			console.log('fail-')
 		});
-
+dfd.resolve({hello : 'hello1'});
 		setTimeout(function() {
-			dfd.reject({hello : 'hello'});
+			dfd.resolve({hello : 'hello'});
 		}, 1000)
 
 		
