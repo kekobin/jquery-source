@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	
+</head>
+<body>
+	<div id="testData">hello data</div>
+	<div id="testData2">hello data</div>
+
+	<script src="data.js"></script>
+	<script>
+		var testData = document.getElementById('testData');
+		var testData2 = document.getElementById('testData2');
+		var data = Util.data;
+
+		data.call(testData, 'name', 'kebin');
+		data.call(testData2, 'name', 'kebin2');
+
+		console.log(data.call(testData, 'name'))
+		console.log(testData)
+
+		console.log(data.call(testData2, 'name'))
+		console.log(testData2)
+	</script>
+</body>
+</html>
