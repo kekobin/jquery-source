@@ -8,7 +8,24 @@
 		var list = [],
 			opts = options && handleOpts(options) || {},
 			self,
-			memory;
+			memory,
+			fire = function(data) {
+				memory = opts.memory && data;
+
+				if(list && list.length > 0) {
+					list.forEach(function(func, i) {
+						func.apply(data[0], data[1]);//data[0]->context
+					});
+				}
+
+				if(list) {
+					if(memory) {
+						list = [];
+					} else {
+						self.disable();
+					}
+				}
+			};
 
 		function handleOpts(opts) {
 			var result = {};
@@ -35,32 +52,21 @@
 					})(arguments);	
 
 					if(memory) {
-						self.fire(memory);
+						fire(memory);
 					}
 				}
 
 				return this;//done().fail()等链式的关键(哪个对象指向add，返回的就是哪个对象)
 			},
-			fire: function(data) {
-				memory = opts.memory && data;
-
-				if(list && list.length > 0) {
-					(function(self, args) {
-						list.forEach(function(func, i) {
-							func.apply(args[0], args[1]);//argus[0]->context
-						});
-					})(this, arguments);
-
-
-				}
-
+			fireWith: function(context, args) {
 				if(list) {
-					if(memory) {
-						list = [];
-					} else {
-						self.disable();
-					}
+					args = args || [];
+					args = [context, args.slice ? args.slice() : args];
+
+					fire(args);
 				}
+
+				return this;
 			},
 			disable: function() {
 				list = undefined;
@@ -107,7 +113,7 @@
 				return this;
 			};
 
-			deferred[ tuple[0] + 'With'] = cb.fire;
+			deferred[ tuple[0] + 'With'] = cb.fireWith;
 		});
 
 		extend(deferred, promise);
@@ -119,12 +125,30 @@
 		var resolveValues = slice.call(arguments),
 			length = resolveValues.length, deferred,
 			resolveContexts,
-			remaining = length != 1 ? length : 0;
+			remaining = length != 1 ? length : 0,
+			updateRemaining = function(i, context, values) {
+				return function(value) {
+					context[i] = this;
+					values[i] = arguments.length > 1 ? slice.call(arguments) : value;
+ 					if( !(--remaining)) { //减数器
+						deferred.resolveWith(context, values);
+					}
+				};
+			};
 
 		deferred = length == 1 ? resolveValues[0] : Util.Deferred();
 
+		if(length > 1) {
+			resolveContexts = new Array(length);
+			for(var i=0;i < length; i++) {
+				resolveValues[i].promise()
+					.done( updateRemaining(i, resolveContexts, resolveValues))
+					.fail( deferred.reject );
+			}
+		}
+
 		if(!length) {
-			deferred.resolve(resolveContexts, resolveValues);
+			deferred.resolveWith(resolveContexts, resolveValues);
 		}
 
 		return deferred.promise();

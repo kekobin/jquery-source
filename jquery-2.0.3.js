@@ -4111,7 +4111,9 @@ jQuery.extend({
 		// Grab necessary hook if one is defined
 		if ( nType !== 1 || !jQuery.isXMLDoc( elem ) ) {
 			name = name.toLowerCase();
-			hooks = jQuery.attrHooks[ name ] ||
+			var tempHooks = jQuery.attrHooks[name];
+			
+			hooks = tempHooks ||
 				( jQuery.expr.match.bool.test( name ) ? boolHook : nodeHook );
 		}
 
@@ -5081,6 +5083,7 @@ jQuery.fn.extend({
 			// Use same guid so caller can remove using origFn
 			fn.guid = origFn.guid || ( origFn.guid = jQuery.guid++ );
 		}
+
 		return this.each( function() {
 			jQuery.event.add( this, types, fn, data, selector );
 		});

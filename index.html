@@ -4,10 +4,14 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
-	<script type="text/javascript" src="jquery-2.0.3.js"></script>
+	<script type="text/javascript" src="jquery-2.0.3.js?t=12"></script>
 </head>
 <body>
-	<div class="content">test</div>
+	<div class="content" style="background:red;width:100px;height:100px;">test</div>
+	<div class="content">test111</div>
+	<div class="data">data</div>
+
+	<ul id="list"></ul>
 	<script type="text/javascript">
 		// $(function() {
 		// 	$('.content').click(function(e) {
@@ -105,24 +109,25 @@
 		// 	console.log("111")
 		// });
 		
-		function aaa() {
-			var dfd = $.Deferred();
+		// function aaa() {
+		// 	var dfd = $.Deferred();
 
-			dfd.resolve();
+		// 	dfd.resolve('this is aaa');
 
-			return dfd;
-		}
-		function bbb() {
-			var dfd = $.Deferred();
+		// 	return dfd;
+		// }
+		// function bbb() {
+		// 	var dfd = $.Deferred();
 
-			dfd.resolve();
+		// 	dfd.resolve('this is bbb');
 
-			return dfd;
-		}
-		var when = $.when(aaa(), bbb());
-		when.done(function() {
-			console.log("111")
-		});
+		// 	return dfd;
+		// }
+		// var when = $.when(aaa(), bbb());
+		// when.done(function(data1, data2) {
+		// 	console.log(data1)
+		// 	console.log(data2)
+		// });
 
 
 		//then()
@@ -139,6 +144,77 @@
 		// setTimeout(function() {
 		// 	dfd.notify({name: 'progress'});
 		// }, 1000)
+	</script>
+
+	<script type="text/javascript">
+		// $('.data').data('name', "kebin");
+		// console.log($('.data').data('name'))
+
+		// $('.content').css('background');
+
+		// function aaa(next) {
+		// 	next();
+		// }
+		// function bbb() {
+		// 	console.log('this is bbb')
+		// }
+		// $('.content').queue('q1', aaa)
+		// $('.content').queue('q1', bbb)
+
+		// $('.content').dequeue('q1')
+
+		// $('.content').on('click', function(e) {
+		// 	// e.preventDefault();
+		// 	console.log(e);
+		// })
+		// $('body').on('click', '.content', function(e) {
+		// 	console.log(e);
+		// })
+
+		// $('.content').attr('name', 'hello');
+
+		//hook模拟
+		// var cssHooks = {
+		// 	get: function(prop) {
+		// 		var prefixes = ['Moz', 'webkit', 'o', 'ms'],
+		// 			prop = prop.charAt(0).toUpperCase() + prop.slice(1),
+		// 			vendorProp = [];
+
+		// 		prefixes.forEach(function(item) {
+		// 			vendorProp.push(item.concat(prop));
+		// 		});
+
+		// 		return vendorProp;
+		// 	}
+		// };
+
+		// function css(elem, prop, value) {
+		// 	if(elem.nodeType !== 1) return;
+
+		// 	var vendorProp = cssHooks.get(prop);
+
+		// 	vendorProp.forEach(function(item) {
+		// 		elem.style[item] = value;
+		// 	});
+		// }
+
+		// var contentEl = document.getElementsByClassName('content')[0];
+		// css(contentEl, 'transform', "rotate(45deg)");
+	</script>
+	<script type="text/javascript">
+		// $('.content').after('<p>hello world</p>')
+		var ul = document.getElementById('list'),
+			li = null,
+			fragment = document.createDocumentFragment();
+
+		for(var i=0;i<10;i++) {
+			li = document.createElement('li');
+			li.appendChild(document.createTextNode('This is item--' + i));
+
+			fragment.appendChild(li);
+		}
+
+		ul.appendChild(fragment);
 	</script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script>
-		// var dfd = Util.Deferred();
+		var dfd = Util.Deferred();
 
 		// dfd.done(function(data) {
 		// 	console.log(data)
@@ -28,7 +28,7 @@
 		// })
 
 		// setTimeout(function() {
-		// 	dfd.notify({hello : 'progress'});
+		// 	dfd.resolve({hello : 'resolve'});
 		// }, 1000)
 
 		// function testPromise() {
@@ -45,31 +45,30 @@
 		// 	console.log('this is promise---')
 		// })
 
-		function test1() {
-			var q = Util.Deferred();
+		// function test1() {
+		// 	var q = Util.Deferred();
 
-			setTimeout(function() {
-				q.resolve('This is test1');
-			}, 2000);
+		// 	setTimeout(function() {
+		// 		q.resolve('This is test1');
+		// 	}, 1000);
 
-			return q;
-		}
+		// 	return q;
+		// }
 		// function test2() {
 		// 	var q = Util.Deferred();
 
 		// 	setTimeout(function() {
 		// 		q.resolve('This is test2');
-		// 	}, 2000);
+		// 	}, 1000);
 
 		// 	return q;
 		// }
 
 		// var when = Util.when(test1(), test2());
-		var when = Util.when(test1());
+		// var when = Util.when();
 
-		when.done(function(data) {
-			console.log(data)
-		})
+		// when.done(function(data1, data2) {
+		// })
 	</script>
 </body>
 </html>
