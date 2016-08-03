@@ -32,13 +32,9 @@
 //             this.trigger( name );
 //     };
 // });
-
-//1.addEvent(elem, types, fn, selector) selector-代理元素
-//
-
 (function(window, undefined) {
-	var idReg = /^\#(\w+)/,
-		classReg = /^\.(\w+)/,
+	var idReg = /^\#(\w+)$/,
+		classReg = /^\.(\w+)$/,
 		arrSlice = Array.prototype.slice,
 		objToString = Object.prototype.toString;
 
@@ -180,7 +176,7 @@
 			//jquery将事件的绑定与处理分离的好处是:
 			//1.对于某一类型事件只会绑定一次，减少多次绑定消耗资源
 			//2.将分离出的事件处理器放到一个队列中，便于管理和销毁
-			//这里events和handle对与某一个elem来说，是唯一的，如：
+			//这里events和handle对于某一个elem来说，是唯一的，如：
 			//Cache = {
 			// 	1: {
 			// 		events: {
