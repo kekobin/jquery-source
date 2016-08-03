@@ -111,16 +111,12 @@
 		
 		// function aaa() {
 		// 	var dfd = $.Deferred();
-
 		// 	dfd.resolve('this is aaa');
-
 		// 	return dfd;
 		// }
 		// function bbb() {
 		// 	var dfd = $.Deferred();
-
 		// 	dfd.resolve('this is bbb');
-
 		// 	return dfd;
 		// }
 		// var when = $.when(aaa(), bbb());
@@ -144,6 +140,56 @@
 		// setTimeout(function() {
 		// 	dfd.notify({name: 'progress'});
 		// }, 1000)
+
+		// var support = $.support;
+		// console.log(support)
+	</script>
+	<script>
+		// var obj = {};
+
+		// // Add an accessor property to the object.
+		// Object.defineProperty(obj, "newAccessorProperty", {
+		//     set: function (x) {
+		//         this.propValue = x;
+		//     },
+		//     get: function () {
+		//         return this.propValue;
+		//     },
+		//     enumerable: true,
+		//     configurable: true
+		// });
+
+		// // Set the property value.
+		// obj.newAccessorProperty = 30;
+
+		// console.log(obj.newAccessorProperty)
+
+		// var cache;
+
+		// Object.defineProperty( cache = {}, 0, {
+		// 	get: function() {
+		// 		return {};
+		// 	}
+		// });
+
+		// cache.data = 10;
+		// console.log(cache)
+
+		// $('.content').data('name', 'kebin');
+		// $('.content').data('name');
+
+		function aaa() {
+			setTimeout(function() {
+				console.log('aaaaaa');
+			}, 1000)
+		}
+		function bbb() {
+			console.log('bbbbbbb');
+		}
+		$('.content').queue('q1', [aaa, bbb]);
+
+		$('.content').dequeue('q1');
+		$('.content').dequeue('q1');
 	</script>
 
 	<script type="text/javascript">
