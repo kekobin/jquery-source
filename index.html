@@ -246,19 +246,19 @@
 		// css(contentEl, 'transform', "rotate(45deg)");
 	</script>
 	<script type="text/javascript">
-		// $('.content').after('<p>hello world</p>')
-		var ul = document.getElementById('list'),
-			li = null,
-			fragment = document.createDocumentFragment();
+		$('.content').after('<p>hello world</p>')
+		// var ul = document.getElementById('list'),
+		// 	li = null,
+		// 	fragment = document.createDocumentFragment();
 
-		for(var i=0;i<10;i++) {
-			li = document.createElement('li');
-			li.appendChild(document.createTextNode('This is item--' + i));
+		// for(var i=0;i<10;i++) {
+		// 	li = document.createElement('li');
+		// 	li.appendChild(document.createTextNode('This is item--' + i));
 
-			fragment.appendChild(li);
-		}
+		// 	fragment.appendChild(li);
+		// }
 
-		ul.appendChild(fragment);
+		// ul.appendChild(fragment);
 	</script>
 </body>
 </html>

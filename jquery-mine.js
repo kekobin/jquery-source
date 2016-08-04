@@ -117,6 +117,35 @@
 		}
 	});
 
+	jQuery.fn.extend({
+		after: function() {
+			return this.domManip(arguments, function(elem) {
+				if(this.parentNode) {
+					this.parentNode.insertBefore(elem, this.nextSibling);
+				}
+			});
+		},
+		domManip: function(args, callback) {
+			var i = -1, length = this.length,
+				fragment = document.createDocumentFragment(), tmp;
+
+			if(typeof args != 'string') return;
+
+			if(/<\w+/.test(args)) {
+
+			} else {
+				tmp = document.createElement('div');
+				tmp.textContent = args;
+				fragment.appendChild(tmp);
+			}
+
+			while(i++ < length) {
+				callback.call(this[i], tmp.childNodes);
+			}
+
+		}
+	});
+
 	rootjQuery = jQuery(document);
 
 	var baseTypes = "Boolean Number String Function Array Date RegExp Object Error".split(" ");
