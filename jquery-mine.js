@@ -114,35 +114,52 @@
 		},
 		parseHTML: function(data, context) {
 			
+		},
+		buildFragment: function(elems, context) {
+			var l = elems.length, i,
+				fragment = context.createDocumentFragment(),
+				tmp = fragment.appendChild(context.createElement('div'));
+
+			if(l) {
+				for(; i < l; i++) {
+					var elem = elems[i];
+					
+				}
+			}
 		}
 	});
 
 	jQuery.fn.extend({
 		after: function() {
 			return this.domManip(arguments, function(elem) {
-				if(this.parentNode) {
-					this.parentNode.insertBefore(elem, this.nextSibling);
-				}
+				// if(this.parentNode) {
+				// 	this.parentNode.insertBefore(elem, this.nextSibling);
+				// }
 			});
 		},
 		domManip: function(args, callback) {
-			var i = -1, length = this.length,
-				fragment = document.createDocumentFragment(), tmp;
+			var i, length = this.length,
+				fragment, tmp;
 
-			if(typeof args != 'string') return;
+			fragment = jQuery.buildFragment(args, this[0].ownerDocument);
+			// for(i = 0;i < args.length; i++) {
+			// 	var nodeString = args[i];
 
-			if(/<\w+/.test(args)) {
+			// 	if(typeof nodeString != 'string') return;
 
-			} else {
-				tmp = document.createElement('div');
-				tmp.textContent = args;
-				fragment.appendChild(tmp);
-			}
+			// 	if(/<\w+/.test(nodeString)) {
 
-			while(i++ < length) {
-				callback.call(this[i], tmp.childNodes);
-			}
+			// 	} else {
+			// 		tmp = document.createElement('div');
+			// 		tmp.textContent = nodeString;
+			// 		fragment.appendChild(tmp);
+			// 	}
 
+			// 	while(i++ < length) {
+			// 		callback.call(this[i], tmp.childNodes);
+			// 	}
+			// }
+			return this;
 		}
 	});
 

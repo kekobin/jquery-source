@@ -111,7 +111,7 @@
 		
 		// function aaa() {
 		// 	var dfd = $.Deferred();
-		// 	dfd.resolve('this is aaa');
+		// 	dfd.resolve(['this is aaa']);
 		// 	return dfd;
 		// }
 		// function bbb() {
@@ -178,16 +178,16 @@
 		// $('.content').data('name', 'kebin');
 		// $('.content').data('name');
 
-		function aaa() {
-			console.log('aaaaaa');
-		}
-		function bbb() {
-			console.log('bbbbbbb');
-		}
-		$('.content').queue('q1', [aaa, bbb]);
+		// function aaa() {
+		// 	console.log('aaaaaa');
+		// }
+		// function bbb() {
+		// 	console.log('bbbbbbb');
+		// }
+		// $('.content').queue('q1', [aaa, bbb]);
 
-		$('.content').dequeue('q1');
-		$('.content').dequeue('q1');
+		// $('.content').dequeue('q1');
+		// $('.content').dequeue('q1');
 	</script>
 
 	<script type="text/javascript">
@@ -246,7 +246,7 @@
 		// css(contentEl, 'transform', "rotate(45deg)");
 	</script>
 	<script type="text/javascript">
-		$('.content').after('<p>hello world</p>')
+		// $('.content').after('<p>hello world</p>')
 		// var ul = document.getElementById('list'),
 		// 	li = null,
 		// 	fragment = document.createDocumentFragment();
@@ -259,6 +259,7 @@
 		// }
 
 		// ul.appendChild(fragment);
+		$('.content').html('<p>hello world</p>')
 	</script>
 </body>
 </html>

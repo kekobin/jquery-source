@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript" src="jquery-2.0.3.js"></script>	
+	<script type="text/javascript">
+	//14.17.108.66 test.www.huya.com
+		var url = "http://test.www.huya.com/hd/xerath/index.php?m=Xerath&do=ajaxGetH5Info&uid=107326168";
+
+		$.ajax({
+			url: url,
+			dataType: 'jsonp',
+			success: function() {
+				console.log('success')
+			},
+			error: function() {
+				console.log('error')
+			}
+		})
+	</script>
+</body>
+</html>
